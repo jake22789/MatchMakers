@@ -1,0 +1,45 @@
+:root{
+    --background--color:rgb(250, 243, 221);
+    --text--color:rgb(2, 0, 0);
+    --main--color:rgb(243, 154, 157);
+    --accsent--color:rgb(34, 255, 255);
+    --action--color:rgb(255, 72, 200);
+
+}
+body{
+    margin: 0;
+}
+.head{
+    background-color: var(--main--color);
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+.login{
+    background-color: var(--accsent--color);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 10rem;
+    border: 10px solid var(--action--color);
+}
+.foot{
+    
+    background-color: var(--main--color);
+    height: 10vh;
+    display: flex;
+    padding-left: 1rem;
+    
+}
+.button{
+    background-color: var(--action--color);
+}
+.middle{
+    background-color: var(--background--color); 
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,0 +1,58 @@
+:root{
+    --background--color:rgb(250, 243, 221);
+    --text--color:rgb(2, 0, 0);
+    --main--color:rgb(243, 154, 157);
+    --accsent--color:rgb(34, 255, 255);
+    --action--color:rgb(255, 72, 200);
+
+}
+body{
+    margin: 0;
+    height: 100vh;
+    padding: 0;
+}
+.head{
+    background-color: var(--main--color);
+    height: 10%;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+.childcard{
+ border: 3px solid var(--accsent--color);
+ width: 45%;
+ height: 20%;
+}
+.parentbox{
+height: 20%;
+width: 100%;
+border: 3px solid black ;
+}
+.childbox{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+width: 100%;
+height: 80%;
+margin: 1rem;
+}
+.foot{
+    
+    background-color: var(--main--color);
+    height: 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.button{
+    background-color: var(--action--color);
+}
+.middle{
+    background-color: var(--background--color); 
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
