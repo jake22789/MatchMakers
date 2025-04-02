@@ -8,7 +8,9 @@ formelement.addEventListener("submit",async (e)=>{
     
     if(result !== null){
         localStorage.setItem("username",result.name);
-        console.log(localStorage.getItem("username"));
+        console.log(result.children[0].name);
+        localStorage.setItem("focuschild",result.children[0].name);
+        localStorage.setItem("Potental","");
         window.location.href = "profile.html"
     }
 })

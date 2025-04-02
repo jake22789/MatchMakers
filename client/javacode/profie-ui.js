@@ -7,22 +7,25 @@ async function renderPage(){
     buildChildCard(profile.children);
     BuildParentcard(profile.name);
 }
-function buildChildCard(children){
+function buildChildCard(children) {
     const childrenContainerElement = document.getElementById("children");
-
+  
     childrenContainerElement.replaceChildren();
-
-    children.forEach(child => {
-        const childElement = document.createElement("div");
-        childElement.classList = "childcard";
-        const nameElement = document.createElement("div"); 
-        nameElement.textContent = child.name;
-        childElement.appendChild(nameElement);
-        childrenContainerElement.appendChild(childElement);
+  
+    children.forEach((child) => {
+      const childElement = document.createElement("div");
+      childElement.classList = "childcard";
+      const nameElement = document.createElement("div");
+      nameElement.textContent = child.name;
+      childElement.appendChild(nameElement);
+      childrenContainerElement.appendChild(childElement);
+      childElement.addEventListener("click", () => {
+        console.log(child.name);
+        localStorage.setItem("focuschild", child.name);
+        renderPage();
+      });
     });
-    
-    
-}
+  }
 function BuildParentcard(name){
     const parentElement = document.getElementById("content");
     const nameElement = document.createElement("div");
