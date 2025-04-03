@@ -1,15 +1,22 @@
 //testing stuff
 using System.Text.Json;
 
-List<Parent> users = new List<Parent>();
-Person sarah = new Person("Sarah",19,"Female", new List<Person>{});
-Person bob = new Person("bob",18,"male", new List<Person>{});
-Person bill = new Person("bill",20,"male", new List<Person>{sarah});
+Person sarah = new Person(1,"Sarah", 19, "Female", new List<Person> { },"");
+Person bob = new Person(2,"bob", 18, "male", new List<Person> { },"");
+Person bill = new Person(3,"bill", 20, "male", new List<Person> { sarah },"");
+Person abby = new Person(4,"abby", 26, "Female", new List<Person> { },"");
+Person caleb = new Person(5,"caleb", 21, "male", new List<Person> { },"");
 List<Person> children = new List<Person>();
 children.Add(bob);
 children.Add(bill);
-users.Add(new Parent("agnis",children));
-
+Dictionary<int, Person> matches = new Dictionary<int, Person>();
+matches.Add(sarah.id, sarah);
+matches.Add(bob.id, bob);
+matches.Add(bill.id, bill);
+matches.Add(abby.id, abby);
+matches.Add(caleb.id, caleb);
+List<Parent> users = new List<Parent>();
+users.Add(new Parent("agnis", children));
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
@@ -22,12 +29,19 @@ app.MapGet("/user/{username}", (string username) =>
 {
     foreach (var item in users)
     {
-        if (item.name == username){
+        if (item.name == username)
+        {
             string json = JsonSerializer.Serialize(item);
             return json;
         }
     }
     return "fail";
+});
+app.MapGet("/matches", () =>
+{
+
+    string json = JsonSerializer.Serialize(matches);
+    return json;
 });
 
 

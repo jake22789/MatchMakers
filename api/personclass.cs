@@ -1,1 +1,1 @@
-record Person(string name,int age,string gender,List<Person>? Likes);
+record Person(int id,string name,int age,string gender,List<Person>? Likes ,string? url);
