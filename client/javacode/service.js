@@ -20,3 +20,13 @@ export const CreateNewUser = async (newparent) => {
         }
     })
 }
+export const CreateNewChild = async (newName,newAge,newGender,username) => {
+    const url = `http://localhost:5217/form/${newName}/${newAge}/${newGender}/${username}`;
+    const response = await fetch(url,{
+        body: newName,
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+}

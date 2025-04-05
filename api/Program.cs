@@ -1,4 +1,5 @@
 //testing stuff
+using System.Globalization;
 using System.Text.Json;
 
 Person sarah = new Person(1,"Sarah", 19, "Female", new List<Person> { },"");
@@ -47,6 +48,16 @@ app.MapGet("/matches", () =>
 app.MapPost("/form/{name}", (string name)=>{
     Console.WriteLine("added user");
     users.Add(new Parent(name,new List<Person>{}));
+});
+app.MapPost("/form/{name}/{age}/{gender}/{username}", (string name,int age,string gender,string username)=>{
+    Console.WriteLine("added user");
+    int num = matches.Count;
+    Person person= new Person(num,name,age,gender,new List<Person>{},"");
+    foreach(Parent user in users){
+        if (user.name == username){
+            user.children.Add(person);
+        }
+    }
 });
 
 

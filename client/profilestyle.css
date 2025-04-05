@@ -56,3 +56,11 @@ margin: 1rem;
     align-items: center;
     flex-direction: column;
 }
+.login{
+    background-color: var(--accsent--color);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 10rem;
+    border: 5px solid var(--action--color);
+}
