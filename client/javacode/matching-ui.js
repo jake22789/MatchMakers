@@ -15,7 +15,9 @@ function buildChild(list) {
   const imgcontainer = document.createElement("div");
   childElement.classList = "childcard";
   ageElement.textContent = list.age;
-  if(list.url == null){
+  imgElement.classList="profilePic";
+  console.log(list.url);
+  if(list.url === ""){
     imgElement.src = "https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&w=800"
   }else{
     imgElement.src = list.url;

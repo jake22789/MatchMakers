@@ -9,10 +9,12 @@ async function renderPage() {
 }
 function buildChildCard(children) {
   const childrenContainerElement = document.getElementById("children");
-
+  
   childrenContainerElement.replaceChildren();
-
+  
   children.forEach((child) => {
+    console.log(child.url);
+    childrenContainerElement.style.backgroundImage = child.url;
     const childElement = document.createElement("div");
     childElement.classList = "childcard";
     const nameElement = document.createElement("div");

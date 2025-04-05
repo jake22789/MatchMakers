@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Text.Json;
 
-Person sarah = new Person(1,"Sarah", 19, "Female", new List<Person> { },"");
+Person sarah = new Person(1,"Sarah", 19, "Female", new List<Person> { },"https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800");
 Person bob = new Person(2,"bob", 18, "male", new List<Person> { },"");
-Person bill = new Person(3,"bill", 20, "male", new List<Person> { sarah },"");
+Person bill = new Person(3,"bill", 20, "male", new List<Person> { sarah },"https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&w=400");
 Person abby = new Person(4,"abby", 26, "Female", new List<Person> { },"");
 Person caleb = new Person(5,"caleb", 21, "male", new List<Person> { },"");
 List<Person> children = new List<Person>();
