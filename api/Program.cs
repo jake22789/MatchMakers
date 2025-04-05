@@ -44,6 +44,10 @@ app.MapGet("/matches", () =>
     return json;
 });
 
+app.MapPost("/form/{name}", (string name)=>{
+    Console.WriteLine("added user");
+    users.Add(new Parent(name,new List<Person>{}));
+});
 
 
 
