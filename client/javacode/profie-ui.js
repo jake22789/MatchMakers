@@ -104,6 +104,7 @@ function buildForm() {
         gender = "Female";
       }
       CreateNewChild(name,age,gender,username);
+      location.reload();
     });
     containerElement.replaceChildren();
 

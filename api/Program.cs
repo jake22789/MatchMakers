@@ -51,13 +51,14 @@ app.MapPost("/form/{name}", (string name)=>{
 });
 app.MapPost("/form/{name}/{age}/{gender}/{username}", (string name,int age,string gender,string username)=>{
     Console.WriteLine("added user");
-    int num = matches.Count;
+    int num = matches.Count+1;
     Person person= new Person(num,name,age,gender,new List<Person>{},"");
     foreach(Parent user in users){
         if (user.name == username){
             user.children.Add(person);
         }
     }
+    matches.Add(person.id,person);
 });
 
 

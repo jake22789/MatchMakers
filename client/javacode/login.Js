@@ -36,11 +36,10 @@ newAcountElement.addEventListener("click", () => {
     const userinputElement = document.getElementById("input");
     console.log(userinputElement.value);
     if (userinputElement.value) {
-      CreateNewUser(userinputElement.value);
+      await CreateNewUser(userinputElement.value); 
     }
+    location.reload();
   });
-
   containerElement.replaceChildren();
-
   containerElement.appendChild(userFormElement);
 });
