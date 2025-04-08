@@ -1,0 +1,1 @@
+record Person(int id,string name,int age,string gender,List<Person>? Likes ,string? url);
