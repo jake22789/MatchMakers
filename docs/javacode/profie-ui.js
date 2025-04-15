@@ -14,25 +14,28 @@ function buildChildCard(children) {
 
   children.forEach((child) => {
     //console.log(child.url);
-    const imageElement = document.createElement("div");
+    const imageElement = document.createElement("figure");
     const image = document.createElement("img");
-    image.src = child.url;
-    imageElement.appendChild(image);
     const childElement = document.createElement("div");
-    childElement.classList = "childcard";
     const nameElement = document.createElement("div");
+    const ageElement = document.createElement("div");
+    const genderElement = document.createElement("div");
+    const uploadform = document.createElement("form");
+    const submitElement = document.createElement("input");
+    const uploadpicturebutton = document.createElement("input");
+    const asideElement = document.createElement("aside");
+    
+    genderElement.textContent=child.gender;
+    ageElement.textContent = child.age;
+    image.src = child.url;
     nameElement.textContent = child.name;
-    childElement.appendChild(nameElement);
-    childrenContainerElement.appendChild(childElement);
+    childElement.classList = "childcard";
     childElement.addEventListener("click", () => {
       //console.log(child.name);
       localStorage.setItem("focuschild", child.name);
       //renderPage();
     });
-    const uploadform = document.createElement("form");
-    const submitElement = document.createElement("input");
     submitElement.type = "submit";
-    const uploadpicturebutton = document.createElement("input");
     uploadpicturebutton.type = "file";
     uploadpicturebutton.id = `uploads${child.id}`;
     uploadpicturebutton.name = `filename${child.id}`;
@@ -42,6 +45,13 @@ function buildChildCard(children) {
       console.log(uploadpicturebutton.files);
       await uploadFileApi(uploadpicturebutton.files[0]);
     });
+    
+    asideElement.appendChild(nameElement);
+    asideElement.appendChild(ageElement);
+    asideElement.appendChild(genderElement);
+    childElement.appendChild(asideElement);
+    childrenContainerElement.appendChild(childElement);
+    imageElement.appendChild(image);
     childElement.appendChild(imageElement);
     uploadform.appendChild(uploadpicturebutton);
     uploadform.appendChild(submitElement);
