@@ -12,8 +12,8 @@ async function renderPage() {
       return false;
     }
   });
-  console.log(childReferance[0].Likes);
-  buildMatchesCard(childReferance[0].Likes);
+  console.log(childReferance[0].likes);
+  buildMatchesCard(childReferance[0].likes);
   BuildSubjectcard(childReferance[0]);
   addEventListeners();
 }

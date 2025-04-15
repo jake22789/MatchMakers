@@ -2,11 +2,11 @@
 using System.Globalization;
 using System.Text.Json;
 
-Person sarah = new Person(1,"Sarah", 19, "Female", new List<Person> { },"https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800");
-Person bob = new Person(2,"bob", 18, "male", new List<Person> { },"");
-Person bill = new Person(3,"bill", 20, "male", new List<Person> { sarah },"https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&w=400");
-Person abby = new Person(4,"abby", 26, "Female", new List<Person> { },"");
-Person caleb = new Person(5,"caleb", 21, "male", new List<Person> { },"");
+Person sarah = new Person(1,"Sarah", 19, "Female", new List<int> { },"https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800");
+Person bob = new Person(2,"bob", 18, "male", new List<int> { },"");
+Person bill = new Person(3,"bill", 20, "male", new List<int> { 1 },"https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&w=400");
+Person abby = new Person(4,"abby", 26, "Female", new List<int> { },"");
+Person caleb = new Person(5,"caleb", 21, "male", new List<int> { },"");
 List<Person> children = new List<Person>();
 children.Add(bob);
 children.Add(bill);
@@ -52,13 +52,29 @@ app.MapPost("/form/{name}", (string name)=>{
 app.MapPost("/form/{name}/{age}/{gender}/{username}", (string name,int age,string gender,string username)=>{
     Console.WriteLine("added user");
     int num = matches.Count+1;
-    Person person= new Person(num,name,age,gender,new List<Person>{},"");
+    Person person= new Person(num,name,age,gender,new List<int>{},"");
     foreach(Parent user in users){
         if (user.name == username){
             user.children.Add(person);
         }
     }
     matches.Add(person.id,person);
+});
+app.MapPost("/match/{index}/{child}",(int index,string child)=>{
+    for (int i = 1;i< matches.Count;i++){
+        if(matches[i].name == child){
+            matches[i].likes?.Add(i);
+        }
+    }
+});
+app.MapGet("/child/{name}",(string name)=>{
+    for (int i = 1;i< matches.Count;i++){
+        if(matches[i].name == name){
+             string json = JsonSerializer.Serialize(matches[i]);
+            return json;
+        }
+    }
+    return "fail";
 });
 
 
