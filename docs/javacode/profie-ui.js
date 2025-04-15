@@ -14,7 +14,10 @@ function buildChildCard(children) {
 
   children.forEach((child) => {
     //console.log(child.url);
-    childrenContainerElement.style.backgroundImage = child.url;
+    const imageElement = document.createElement("div");
+    const image = document.createElement("img");
+    image.src = child.url;
+    imageElement.appendChild(image);
     const childElement = document.createElement("div");
     childElement.classList = "childcard";
     const nameElement = document.createElement("div");
@@ -39,6 +42,7 @@ function buildChildCard(children) {
       console.log(uploadpicturebutton.files);
       await uploadFileApi(uploadpicturebutton.files[0]);
     });
+    childElement.appendChild(imageElement);
     uploadform.appendChild(uploadpicturebutton);
     uploadform.appendChild(submitElement);
     childElement.appendChild(uploadform);
@@ -62,19 +66,25 @@ function buildForm() {
   const newAcountElement = document.getElementById("newChild");
   newAcountElement.addEventListener("click", () => {
     const containerElement = document.getElementById("children");
-
     const userFormElement = document.createElement("form");
     const userNLabelElement = document.createElement("label");
     const userNameElement = document.createElement("input");
     const userALabelElement = document.createElement("label");
     const userageElement = document.createElement("input");
+    const resetButtonElement= document.createElement("button");
     const userSubmitElement = document.createElement("input");
     const genderLabelElement = document.createElement("label");
     const genderinputElementM = document.createElement("input");
     const genderLabelElementM = document.createElement("label");
     const malecontainerElement = document.createElement("div");
     const FemalcontainerElement = document.createElement("div");
-    const genderformElement = document.createElement("form");
+    const genderformElement = document.createElement("div");
+
+    resetButtonElement.addEventListener("click",(e)=>{
+      e.preventDefault();
+      userFormElement.reset();
+    });
+    resetButtonElement.textContent = "Reset";
     genderinputElementM.id = "male";
     genderLabelElementM.htmlFor = "male";
     genderLabelElementM.textContent = "Male";
@@ -109,6 +119,7 @@ function buildForm() {
     userFormElement.appendChild(genderformElement);
 
     userFormElement.appendChild(userSubmitElement);
+    userFormElement.appendChild(resetButtonElement);
 
     userFormElement.addEventListener("submit", async (e) => {
       e.preventDefault();

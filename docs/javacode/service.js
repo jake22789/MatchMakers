@@ -1,5 +1,5 @@
-//const baseUrl = "http://localhost:5217"
-const baseUrl = "https://matchmakers-envk.onrender.com"
+const baseUrl = "http://localhost:5217"
+//const baseUrl = "https://matchmakers-envk.onrender.com"
 
 export const getUser = async (username)=>{
     const url = `${baseUrl}/user/${username}`

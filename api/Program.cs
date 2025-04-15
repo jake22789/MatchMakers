@@ -77,13 +77,10 @@ app.MapGet("/child/{name}",(string name)=>{
     return "fail";
 });
 
-
-
-
 app.MapPost("/upload", (IFormFile file) =>
 {
     Console.WriteLine("got an upload");
-    Console.WriteLine(file.FileName);
+    Console.WriteLine(file);
 }).DisableAntiforgery();
 
 app.Run();
