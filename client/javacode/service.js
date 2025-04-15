@@ -53,3 +53,14 @@ export async function getChildbyName(name){
     return object;
 
 }
+export const uploadFileApi = async (file) =>{
+    const formdata = new FormData();
+    formdata.append("file",file);
+    const responce = await fetch(
+        "http://localhost:5217/upload",{
+            method:"POST",
+            body:formdata,
+            
+        }
+    );
+}

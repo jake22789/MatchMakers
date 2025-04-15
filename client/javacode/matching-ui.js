@@ -36,7 +36,6 @@ async function renderpage() {
   }
   focuschild.likes.forEach(element => {
     if(element == num){
-      console.log("hit");
       num ++;
 
     }

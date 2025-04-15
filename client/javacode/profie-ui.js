@@ -1,19 +1,19 @@
-import { CreateNewChild, getUser } from "./service.js";
+import { CreateNewChild, getUser,uploadFileApi } from "./service.js";
 
 async function renderPage() {
   const username = localStorage.getItem("username");
   const profile = await getUser(username);
-  console.log(profile.children);
+  //console.log(profile.children);
   buildChildCard(profile.children);
   BuildParentcard(profile.name);
 }
 function buildChildCard(children) {
   const childrenContainerElement = document.getElementById("children");
-  
+
   childrenContainerElement.replaceChildren();
-  
+
   children.forEach((child) => {
-    console.log(child.url);
+    //console.log(child.url);
     childrenContainerElement.style.backgroundImage = child.url;
     const childElement = document.createElement("div");
     childElement.classList = "childcard";
@@ -22,10 +22,26 @@ function buildChildCard(children) {
     childElement.appendChild(nameElement);
     childrenContainerElement.appendChild(childElement);
     childElement.addEventListener("click", () => {
-      console.log(child.name);
+      //console.log(child.name);
       localStorage.setItem("focuschild", child.name);
       renderPage();
     });
+    const uploadform = document.createElement("form");
+    const submitElement = document.createElement("input");
+    submitElement.type = "submit";
+    const uploadpicturebutton = document.createElement("input");
+    uploadpicturebutton.type = "file";
+    uploadpicturebutton.id = "uploads";
+    uploadpicturebutton.name = "filename";
+    uploadform.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fileElement = document.getElementById("uploads");
+      console.log(fileElement.files);
+      await uploadFileApi(fileElement.files[0]);
+    });
+    uploadform.appendChild(uploadpicturebutton);
+    uploadform.appendChild(submitElement);
+    childElement.appendChild(uploadform);
   });
 }
 function BuildParentcard(name) {
@@ -105,7 +121,7 @@ function buildForm() {
       } else {
         gender = "Female";
       }
-      CreateNewChild(name,age,gender,username);
+      CreateNewChild(name, age, gender, username);
       location.reload();
     });
     containerElement.replaceChildren();
