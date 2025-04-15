@@ -1,17 +1,20 @@
+//const baseUrl = "http://localhost:5217"
+const baseUrl = "https://matchmakers-envk.onrender.com"
+
 export const getUser = async (username)=>{
-    const url = ` http://localhost:5217/user/${username}`
+    const url = `${baseUrl}/user/${username}`
     const response = await fetch(url);
     const object = await response.json();
     return object;
 }
 export const GetMatches= async ()=>{
-    const url = ` http://localhost:5217/matches`
+    const url = `${baseUrl}/matches`
     const response = await fetch(url);
     const object = await response.json();
     return object;
 }
 export const CreateNewUser = async (newparent) => {
-    const url = `http://localhost:5217/form/${newparent}`;
+    const url = `${baseUrl}/${newparent}`;
     const response = await fetch(url,{
         body: newparent,
         method: "POST",
@@ -21,7 +24,7 @@ export const CreateNewUser = async (newparent) => {
     });
 }
 export const CreateNewChild = async (newName,newAge,newGender,username) => {
-    const url = `http://localhost:5217/form/${newName}/${newAge}/${newGender}/${username}`;
+    const url = `${baseUrl}/form/${newName}/${newAge}/${newGender}/${username}`;
     const response = await fetch(url,{
         body: newName,
         method: "POST",
@@ -31,7 +34,7 @@ export const CreateNewChild = async (newName,newAge,newGender,username) => {
     })
 }
 export async function addLike(index,child){
-    const url = `http://localhost:5217/match/${index}/${child}`;
+    const url = `${baseUrl}/match/${index}/${child}`;
     const response = await fetch(url,{
         body: child,
         method: "POST",
@@ -47,7 +50,7 @@ export function addReject(index,child){
     console.log(child);
 }
 export async function getChildbyName(name){
-    const url = ` http://localhost:5217/child/${name}`
+    const url = `${baseUrl}/child/${name}`
     const response = await fetch(url);
     const object = await response.json();
     return object;
@@ -57,7 +60,7 @@ export const uploadFileApi = async (file) =>{
     const formdata = new FormData();
     formdata.append("file",file);
     const responce = await fetch(
-        "http://localhost:5217/upload",{
+        `${baseUrl}/upload`,{
             method:"POST",
             body:formdata,
             

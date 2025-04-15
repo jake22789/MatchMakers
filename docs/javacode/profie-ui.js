@@ -24,20 +24,20 @@ function buildChildCard(children) {
     childElement.addEventListener("click", () => {
       //console.log(child.name);
       localStorage.setItem("focuschild", child.name);
-      renderPage();
+      //renderPage();
     });
     const uploadform = document.createElement("form");
     const submitElement = document.createElement("input");
     submitElement.type = "submit";
     const uploadpicturebutton = document.createElement("input");
     uploadpicturebutton.type = "file";
-    uploadpicturebutton.id = "uploads";
-    uploadpicturebutton.name = "filename";
+    uploadpicturebutton.id = `uploads${child.id}`;
+    uploadpicturebutton.name = `filename${child.id}`;
     uploadform.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const fileElement = document.getElementById("uploads");
-      console.log(fileElement.files);
-      await uploadFileApi(fileElement.files[0]);
+      
+      console.log(uploadpicturebutton.files);
+      await uploadFileApi(uploadpicturebutton.files[0]);
     });
     uploadform.appendChild(uploadpicturebutton);
     uploadform.appendChild(submitElement);
