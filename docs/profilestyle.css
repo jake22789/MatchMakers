@@ -26,6 +26,7 @@ body {
   width: 30rem;
   height: 25rem;
   margin: 1rem;
+  transition: width .5s,height 1s;
 }
 .childcard:hover {
     width: 32rem;
