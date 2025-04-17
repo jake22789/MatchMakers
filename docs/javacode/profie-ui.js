@@ -1,4 +1,4 @@
-import { CreateNewChild, getUser,uploadFileApi } from "./service.js";
+import { CreateNewChild, getImage, getUser,uploadFileApi } from "./service.js";
 
 async function renderPage() {
   const username = localStorage.getItem("username");
@@ -7,6 +7,24 @@ async function renderPage() {
   buildChildCard(profile.children);
   BuildParentcard(profile.name);
 }
+async function addImage(child){
+  const picturesElement = document.createElement("div");
+  console.log(child.url);
+  child.url.forEach(async(url)=>{
+    if(url != ""){
+      console.log(url);
+      const promiseimg = getImage(url);
+      const img = await promiseimg;
+      console.log(img);
+    // const imageElement = document.createElement("figure");
+    // const image = document.createElement("img");
+    // image.src = child.url;
+    // imageElement.appendChild(image);
+    // picturesElement.appendChild(imageElement);
+  }
+  });
+  return picturesElement
+}
 function buildChildCard(children) {
   const childrenContainerElement = document.getElementById("children");
 
@@ -14,8 +32,7 @@ function buildChildCard(children) {
 
   children.forEach((child) => {
     //console.log(child.url);
-    const imageElement = document.createElement("figure");
-    const image = document.createElement("img");
+    const imagesElement = addImage(child);
     const childElement = document.createElement("div");
     const nameElement = document.createElement("div");
     const ageElement = document.createElement("div");
@@ -25,9 +42,10 @@ function buildChildCard(children) {
     const uploadpicturebutton = document.createElement("input");
     const asideElement = document.createElement("aside");
     
+    
     genderElement.textContent=child.gender;
     ageElement.textContent = child.age;
-    image.src = child.url;
+    
     nameElement.textContent = child.name;
     childElement.classList = "childcard";
     childElement.addEventListener("click", () => {
@@ -42,8 +60,9 @@ function buildChildCard(children) {
     uploadform.addEventListener("submit", async (e) => {
       e.preventDefault();
       
-      console.log(uploadpicturebutton.files);
-      await uploadFileApi(uploadpicturebutton.files[0]);
+      console.log(uploadpicturebutton.files[0],child.id);
+      await uploadFileApi(uploadpicturebutton.files[0],child.id);
+      buildChildCard(children);
     });
     
     asideElement.appendChild(nameElement);
@@ -51,8 +70,7 @@ function buildChildCard(children) {
     asideElement.appendChild(genderElement);
     childElement.appendChild(asideElement);
     childrenContainerElement.appendChild(childElement);
-    imageElement.appendChild(image);
-    childElement.appendChild(imageElement);
+    //childElement.appendChild(imagesElement);
     uploadform.appendChild(uploadpicturebutton);
     uploadform.appendChild(submitElement);
     childElement.appendChild(uploadform);

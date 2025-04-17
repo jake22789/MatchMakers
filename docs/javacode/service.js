@@ -56,14 +56,21 @@ export async function getChildbyName(name){
     return object;
 
 }
-export const uploadFileApi = async (file) =>{
+export const uploadFileApi = async (file,id) =>{
     const formdata = new FormData();
     formdata.append("file",file);
     const responce = await fetch(
-        `${baseUrl}/upload`,{
+        `${baseUrl}/upload/${id}`,{
             method:"POST",
             body:formdata,
             
         }
     );
+}
+export const getImage = async (imageName)=>{
+    const url = `${baseUrl}/images/${imageName}`
+    const response = await fetch(url);
+    
+    console.log(response);
+    return response;
 }

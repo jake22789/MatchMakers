@@ -28,6 +28,10 @@ body {
   margin: 1rem;
   transition: width .5s,height 1s;
 }
+img{
+  width: 25rem;
+  height: 25rem;
+}
 .childcard:hover {
     width: 32rem;
   height: 27rem;

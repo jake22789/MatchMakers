@@ -2,11 +2,12 @@
 using System.Globalization;
 using System.Text.Json;
 
-Person sarah = new Person(1, "Sarah", 19, "Female", new List<int> { }, "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800");
-Person bob = new Person(2, "bob", 18, "male", new List<int> { }, "");
-Person bill = new Person(3, "bill", 20, "male", new List<int> { 1 }, "https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&w=400");
-Person abby = new Person(4, "abby", 26, "Female", new List<int> { }, "");
-Person caleb = new Person(5, "caleb", 21, "male", new List<int> { }, "");
+//"https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800" "https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&w=400"
+Person sarah = new Person(1, "Sarah", 19, "Female", new List<int> { },new List<string> {""});
+Person bob = new Person(2, "bob", 18, "male", new List<int> { }, new List<string> {""});
+Person bill = new Person(3, "bill", 20, "male", new List<int> { 1 }, new List<string> {""});
+Person abby = new Person(4, "abby", 26, "Female", new List<int> { }, new List<string> {""});
+Person caleb = new Person(5, "caleb", 21, "male", new List<int> { }, new List<string> {""});
 List<Person> children = new List<Person>();
 children.Add(bob);
 children.Add(bill);
@@ -54,7 +55,7 @@ app.MapPost("/form/{name}/{age}/{gender}/{username}", (string name, int age, str
 {
     Console.WriteLine("added user");
     int num = matches.Count + 1;
-    Person person = new Person(num, name, age, gender, new List<int> { }, "");
+    Person person = new Person(num, name, age, gender, new List<int> { }, new List<string> {""});
     foreach (Parent user in users)
     {
         if (user.name == username)
@@ -87,11 +88,12 @@ app.MapGet("/child/{name}", (string name) =>
     return "fail";
 });
 
-app.MapPost("/upload", async (IFormFile file) =>
+app.MapPost("/upload/{id}", async (IFormFile file,int id) =>
 {
     Console.WriteLine("got an upload");
-    Console.WriteLine(file);
+    Console.WriteLine(file.FileName);
     string filePath = "./images/"+file.FileName;
+    matches[id].url.Add(file.FileName);
     using (Stream fileStream = new FileStream(filePath, FileMode.Create))
     {
         await file.CopyToAsync(fileStream);
