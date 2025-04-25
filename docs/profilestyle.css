@@ -10,11 +10,22 @@ body {
   height: 99vh;
   padding: 0;
 }
+.parentName{
+  font-size: 2rem;
+}
+.logo{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  img{
+    height: 5rem;
+    width: 5rem;
+  }
+}
 .head {
   background-color: var(--main--color);
-  height: 10%;
+  height: 10vh;
   display: flex;
-  align-items: center;
   padding-left: 1rem;
 }
 .childcard {
@@ -27,14 +38,15 @@ body {
   height: 25rem;
   margin: 1rem;
   transition: width .5s,height 1s;
+  overflow-y:scroll;
 }
 img{
   width: 25rem;
   height: 25rem;
 }
 .childcard:hover {
-    width: 32rem;
-  height: 27rem;
+    scale: 1.05;
+    transition: .5s;
 }
 .parentbox {
   padding-left: 1rem;

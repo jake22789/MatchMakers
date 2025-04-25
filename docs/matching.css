@@ -65,7 +65,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1;
+  width: 100%;
+  height: 90%;
+}
+.imgcontainer{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  background-size: cover;
 }
 .good {
   display: flex;

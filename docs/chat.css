@@ -11,6 +11,15 @@ body {
     height: 99vh;
     padding: 0;
   }
+  .logo{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    img{
+      height: 5rem;
+      width: 5rem;
+    }
+  }
 .head{
     background-color: var(--main--color);
     height: 10%;

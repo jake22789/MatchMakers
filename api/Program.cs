@@ -102,6 +102,7 @@ app.MapPost("/upload/{id}", async (IFormFile file,int id) =>
 app.MapGet("/images/{imageName}",(string imageName)=>{
     string filePath = "./images/"+ imageName;
     byte[] bytes = System.IO.File.ReadAllBytes(filePath);
+    Console.WriteLine("sent file");
     return Results.File(bytes);
 });
 app.Run();

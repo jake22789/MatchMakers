@@ -1,5 +1,5 @@
-const baseUrl = "http://localhost:5217"
-//const baseUrl = "https://matchmakers-envk.onrender.com"
+//const baseUrl = "http://localhost:5217"
+const baseUrl = "https://matchmakers-envk.onrender.com"
 
 export const getUser = async (username)=>{
     const url = `${baseUrl}/user/${username}`
@@ -66,11 +66,12 @@ export const uploadFileApi = async (file,id) =>{
             
         }
     );
+    console.log(responce);
 }
 export const getImage = async (imageName)=>{
     const url = `${baseUrl}/images/${imageName}`
     const response = await fetch(url);
     
-    console.log(response);
+    //console.log(response);
     return response;
 }

@@ -9,18 +9,18 @@ async function renderPage() {
 }
 async function addImage(child){
   const picturesElement = document.createElement("div");
-  console.log(child.url);
+  //console.log(child.url);
   child.url.forEach(async(url)=>{
     if(url != ""){
-      console.log(url);
+      //console.log(url);
       const promiseimg = getImage(url);
       const img = await promiseimg;
-      console.log(img);
-    // const imageElement = document.createElement("figure");
-    // const image = document.createElement("img");
-    // image.src = child.url;
-    // imageElement.appendChild(image);
-    // picturesElement.appendChild(imageElement);
+      //console.log(img.url);
+      const imageElement = document.createElement("figure");
+      const image = document.createElement("img");
+      image.src = img.url;
+      imageElement.appendChild(image);
+      picturesElement.appendChild(imageElement);
   }
   });
   return picturesElement
@@ -30,9 +30,9 @@ function buildChildCard(children) {
 
   childrenContainerElement.replaceChildren();
 
-  children.forEach((child) => {
+  children.forEach(async(child) => {
     //console.log(child.url);
-    const imagesElement = addImage(child);
+    const imagesElement =  await addImage(child);
     const childElement = document.createElement("div");
     const nameElement = document.createElement("div");
     const ageElement = document.createElement("div");
@@ -60,8 +60,10 @@ function buildChildCard(children) {
     uploadform.addEventListener("submit", async (e) => {
       e.preventDefault();
       
-      console.log(uploadpicturebutton.files[0],child.id);
       await uploadFileApi(uploadpicturebutton.files[0],child.id);
+      //console.log(uploadpicturebutton.files[0].name);
+      const file =  await getImage(uploadpicturebutton.files[0].name);
+      //console.log(file.url);
       buildChildCard(children);
     });
     
@@ -70,7 +72,8 @@ function buildChildCard(children) {
     asideElement.appendChild(genderElement);
     childElement.appendChild(asideElement);
     childrenContainerElement.appendChild(childElement);
-    //childElement.appendChild(imagesElement);
+    //console.log(imagesElement);
+    childElement.appendChild(imagesElement);
     uploadform.appendChild(uploadpicturebutton);
     uploadform.appendChild(submitElement);
     childElement.appendChild(uploadform);
@@ -79,11 +82,12 @@ function buildChildCard(children) {
 function BuildParentcard(name) {
   const parentElement = document.getElementById("content");
   const nameElement = document.createElement("div");
+  nameElement.classList = "parentName";
   const buttonElement = document.createElement("button");
 
   parentElement.replaceChildren();
 
-  nameElement.textContent = name;
+  nameElement.textContent = name[0].toUpperCase() + name.slice(1);
   buttonElement.textContent = "add child";
   buttonElement.id = "newChild";
   parentElement.appendChild(nameElement);

@@ -1,6 +1,7 @@
-import { getUser } from "./service.js";
+import { getUser,GetMatches } from "./service.js";
 
 async function renderPage() {
+  
   const username = localStorage.getItem("username");
   const profile = await getUser(username);
   const focuschild = localStorage.getItem("focuschild");
@@ -12,19 +13,23 @@ async function renderPage() {
       return false;
     }
   });
-  console.log(childReferance[0].likes);
-  buildMatchesCard(childReferance[0].likes);
+  
+  buildMatchesCard(childReferance[0].likes,childReferance[0].id);
   BuildSubjectcard(childReferance[0]);
   addEventListeners();
 }
-function buildMatchesCard(children) {
+async function buildMatchesCard(children,id) {
   const childrenContainerElement = document.getElementById("matches");
-
+  var dictionary = await GetMatches();
   childrenContainerElement.replaceChildren();
-
+  console.log(dictionary[1]);
   if (children[0] != null) {
     children.forEach((child) => {
-        const matchcardElement = buildChild(child);
+      if(child == 3) {
+        return;
+      }
+      console.log(child);
+        const matchcardElement = buildChild(dictionary[child]);
         childrenContainerElement.appendChild(matchcardElement);
     });
   } else {
@@ -69,6 +74,7 @@ function addEventListeners() {
 }
 function buildChildCard(children) {
   const childrenContainerElement = document.getElementById("matches");
+  console.log(children);
 
   childrenContainerElement.replaceChildren();
 
